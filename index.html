@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>eCurrency</title>
+
+    <link rel="shortcut icon" href="icons/curcy-24.png" type="image/png">
+	<link type="text/css" rel="stylesheet" href="ex-ui.css">
+	<link type="text/css" rel="stylesheet" href="currency.css">
+
+	<script type="text/javascript" src="libs/jquery.min.js"></script>
+	<script type="text/javascript" src="libs/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="libs/decimal.min.js"></script>
+
+	<script type="text/javascript" src="data-loader.js"></script>
+	<script type="text/javascript" src="data-currencies.js"></script>
+	<script type="text/javascript" src="data-flags.js"></script>
+
+	<script type="text/javascript" src="ex-ui.js"></script>
+	<script type="text/javascript" src="settings.js"></script>
+	<script type="text/javascript" src="rowsObj.js"></script>
+	<script type="text/javascript" src="currencyUI.js"></script>
+</head>
+
+<body>
+	<div id="main">
+		<div id="caption">
+			<h3>eCurrency v0.1</h3>
+			<span id="source">
+				<div class="combo-button click-to-popup-menu" title="Data Source">
+					<div class="icon icon-16" data-icon-image="http://www.freecurrencyconverterapi.com/favicon.ico"></div>
+					<div class="label">freecurrencyconverterapi.com</div>
+					<div class="caret"></div>
+					<ul class="dropdown-menu">
+						<li>
+							<div class="icon icon-16" data-icon-image="http://www.freecurrencyconverterapi.com/favicon.ico"></div>
+							freecurrencyconverterapi.com
+						</li>
+					</ul>
+				</div>
+			</span>
+		</div>
+
+		<span>From:</span>
+		<div id="fromCurrency" class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu" title="From Currency">
+			<span class="icon icon-16" data-icon-image="./flags/unitedstates.png"></span>
+			<input class="label" name="currency" value="USD" />
+			<span class="caret"></span>
+		</div>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<span>Amount:</span>
+		
+		<form id="fromAmount">
+			<div class="combo-box combo-box-icon amount" title="Currency Amount">
+				<span class="icon icon-16" data-icon-label="$"></span>
+				<input class="label" id="amountFrom" name="amount" type="number" value="100" required="required" min="0.0001" step="any" />
+				<img class="search" src="./icons/search.png" alt="?" title="Query rates!" />
+				<input type="submit" class="submit" value="?" />
+			</div>
+		</form>
+
+		<div class="toBox">
+			<div class="row header">
+				<span class="index">#</span>
+				<span class="currency">Target</span>
+				<span class="rate">Rate</span>
+				<span class="amount">Amount</span>
+				<span class="Back">Back</span>
+			</div>
+
+			<div class="row disabled template">
+				<span class="index">
+					<span class="icon icon-12" data-icon-image="./icons/bin-12b.png" title="Remove Currency"></span>
+					<span class="number"></span>
+				</span>
+				<span class="currency">
+					<div class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu">
+						<span class="icon icon-16" data-icon-label="&gt;" ></span>
+						<input class="label" name="currency" value="" />
+						<span class="caret"></span>
+					</div>
+				</span>
+				<span class="rate">
+					<div class="value"></div>
+				</span>
+				<span class="amount">
+					<div class="value"></div>
+				</span>
+				<span class="Back">
+					<div class="value"></div>
+				</span>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

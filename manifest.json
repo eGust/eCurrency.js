@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "eCurrency",
+  "version": "0.1",
+
+  "description": "A currency tools.",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+  "icons" : {
+    "128": "./icons/curcy-128.png",
+    "64": "./icons/curcy-64.png",
+    "48": "./icons/curcy-48.png",
+    "32": "./icons/curcy-32.png",
+    "38": "./icons/curcy-38.png",
+    "24": "./icons/curcy-24.png",
+    "19": "./icons/curcy-19.png",
+    "16": "./icons/curcy-16.png"
+  },
+
+  "browser_action": {
+    "default_icon": "./icons/curcy-19.png",
+    "default_popup": "index.html"
+  },
+  
+  "permissions": [
+    "http://*.freecurrencyconverterapi.com/*"
+  ],
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  
+  "offline_enabled": false,
+  "author": "eGust"
+}
