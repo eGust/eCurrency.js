@@ -1,0 +1,400 @@
+.icon.flag {
+	display: inline-block;
+	background: url('../icons/cflags.png') no-repeat;
+	width: 22px;
+	height: 14px;
+	top: 5px;
+	border: 1px solid #CCC;
+}
+
+.flag.flag-AFN {
+	background-position: 0px 0px;
+}
+
+.flag.flag-ALL {
+	background-position: -22px 0px;
+}
+
+.flag.flag-ANG {
+	background-position: -44px 0px;
+}
+
+.flag.flag-ARS {
+	background-position: -66px 0px;
+}
+
+.flag.flag-AUD {
+	background-position: -88px 0px;
+}
+
+.flag.flag-AWG {
+	background-position: -110px 0px;
+}
+
+.flag.flag-AZN {
+	background-position: -132px 0px;
+}
+
+.flag.flag-BAM {
+	background-position: -154px 0px;
+}
+
+.flag.flag-BBD {
+	background-position: -176px 0px;
+}
+
+.flag.flag-BGN {
+	background-position: -198px 0px;
+}
+
+.flag.flag-BND {
+	background-position: 0px -14px;
+}
+
+.flag.flag-BOB {
+	background-position: -22px -14px;
+}
+
+.flag.flag-BRL {
+	background-position: -44px -14px;
+}
+
+.flag.flag-BSD {
+	background-position: -66px -14px;
+}
+
+.flag.flag-BWP {
+	background-position: -88px -14px;
+}
+
+.flag.flag-BYR {
+	background-position: -110px -14px;
+}
+
+.flag.flag-BZD {
+	background-position: -132px -14px;
+}
+
+.flag.flag-CAD {
+	background-position: -154px -14px;
+}
+
+.flag.flag-CHF {
+	background-position: -176px -14px;
+}
+
+.flag.flag-CLP {
+	background-position: -198px -14px;
+}
+
+.flag.flag-CNY {
+	background-position: 0px -28px;
+}
+
+.flag.flag-COP {
+	background-position: -22px -28px;
+}
+
+.flag.flag-CRC {
+	background-position: -44px -28px;
+}
+
+.flag.flag-CZK {
+	background-position: -66px -28px;
+}
+
+.flag.flag-DKK {
+	background-position: -88px -28px;
+}
+
+.flag.flag-DOP {
+	background-position: -110px -28px;
+}
+
+.flag.flag-EGP {
+	background-position: -132px -28px;
+}
+
+.flag.flag-EUR {
+	background-position: -154px -28px;
+}
+
+.flag.flag-FJD {
+	background-position: -176px -28px;
+}
+
+.flag.flag-FKP {
+	background-position: -198px -28px;
+}
+
+.flag.flag-GBP {
+	background-position: 0px -42px;
+}
+
+.flag.flag-GIP {
+	background-position: -22px -42px;
+}
+
+.flag.flag-GTQ {
+	background-position: -44px -42px;
+}
+
+.flag.flag-GYD {
+	background-position: -66px -42px;
+}
+
+.flag.flag-HKD {
+	background-position: -88px -42px;
+}
+
+.flag.flag-HNL {
+	background-position: -110px -42px;
+}
+
+.flag.flag-HRK {
+	background-position: -132px -42px;
+}
+
+.flag.flag-HUF {
+	background-position: -154px -42px;
+}
+
+.flag.flag-IDR {
+	background-position: -176px -42px;
+}
+
+.flag.flag-ILS {
+	background-position: -198px -42px;
+}
+
+.flag.flag-INR {
+	background-position: 0px -56px;
+}
+
+.flag.flag-IRR {
+	background-position: -22px -56px;
+}
+
+.flag.flag-ISK {
+	background-position: -44px -56px;
+}
+
+.flag.flag-JMD {
+	background-position: -66px -56px;
+}
+
+.flag.flag-JPY {
+	background-position: -88px -56px;
+}
+
+.flag.flag-KGS {
+	background-position: -110px -56px;
+}
+
+.flag.flag-KHR {
+	background-position: -132px -56px;
+}
+
+.flag.flag-KPW {
+	background-position: -154px -56px;
+}
+
+.flag.flag-KRW {
+	background-position: -176px -56px;
+}
+
+.flag.flag-KYD {
+	background-position: -198px -56px;
+}
+
+.flag.flag-KZT {
+	background-position: 0px -70px;
+}
+
+.flag.flag-LAK {
+	background-position: -22px -70px;
+}
+
+.flag.flag-LBP {
+	background-position: -44px -70px;
+}
+
+.flag.flag-LKR {
+	background-position: -66px -70px;
+}
+
+.flag.flag-LRD {
+	background-position: -88px -70px;
+}
+
+.flag.flag-LVL {
+	background-position: -110px -70px;
+}
+
+.flag.flag-MKD {
+	background-position: -132px -70px;
+}
+
+.flag.flag-MNT {
+	background-position: -154px -70px;
+}
+
+.flag.flag-MUR {
+	background-position: -176px -70px;
+}
+
+.flag.flag-MXN {
+	background-position: -198px -70px;
+}
+
+.flag.flag-MYR {
+	background-position: 0px -84px;
+}
+
+.flag.flag-NAD {
+	background-position: -22px -84px;
+}
+
+.flag.flag-NGN {
+	background-position: -44px -84px;
+}
+
+.flag.flag-NIO {
+	background-position: -66px -84px;
+}
+
+.flag.flag-NOK {
+	background-position: -88px -84px;
+}
+
+.flag.flag-NPR {
+	background-position: -110px -84px;
+}
+
+.flag.flag-NZD {
+	background-position: -132px -84px;
+}
+
+.flag.flag-OMR {
+	background-position: -154px -84px;
+}
+
+.flag.flag-PAB {
+	background-position: -176px -84px;
+}
+
+.flag.flag-PEN {
+	background-position: -198px -84px;
+}
+
+.flag.flag-PHP {
+	background-position: 0px -98px;
+}
+
+.flag.flag-PKR {
+	background-position: -22px -98px;
+}
+
+.flag.flag-PLN {
+	background-position: -44px -98px;
+}
+
+.flag.flag-PYG {
+	background-position: -66px -98px;
+}
+
+.flag.flag-QAR {
+	background-position: -88px -98px;
+}
+
+.flag.flag-RON {
+	background-position: -110px -98px;
+}
+
+.flag.flag-RSD {
+	background-position: -132px -98px;
+}
+
+.flag.flag-RUB {
+	background-position: -154px -98px;
+}
+
+.flag.flag-SAR {
+	background-position: -176px -98px;
+}
+
+.flag.flag-SBD {
+	background-position: -198px -98px;
+}
+
+.flag.flag-SCR {
+	background-position: 0px -112px;
+}
+
+.flag.flag-SEK {
+	background-position: -22px -112px;
+}
+
+.flag.flag-SGD {
+	background-position: -44px -112px;
+}
+
+.flag.flag-SHP {
+	background-position: -66px -112px;
+}
+
+.flag.flag-SOS {
+	background-position: -88px -112px;
+}
+
+.flag.flag-SRD {
+	background-position: -110px -112px;
+}
+
+.flag.flag-SYP {
+	background-position: -132px -112px;
+}
+
+.flag.flag-THB {
+	background-position: -154px -112px;
+}
+
+.flag.flag-TTD {
+	background-position: -176px -112px;
+}
+
+.flag.flag-TWD {
+	background-position: -198px -112px;
+}
+
+.flag.flag-UAH {
+	background-position: 0px -126px;
+}
+
+.flag.flag-USD {
+	background-position: -22px -126px;
+}
+
+.flag.flag-UYU {
+	background-position: -44px -126px;
+}
+
+.flag.flag-UZS {
+	background-position: -66px -126px;
+}
+
+.flag.flag-VND {
+	background-position: -88px -126px;
+}
+
+.flag.flag-YER {
+	background-position: -110px -126px;
+}
+
+.flag.flag-ZAR {
+	background-position: -132px -126px;
+}
+
+.flag.flag-MAD {
+	background-position: -154px -126px;
+}

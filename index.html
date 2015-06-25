@@ -1,41 +1,48 @@
 <!doctype html>
-<html>
+<html ng-app="eCurrency">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>eCurrency</title>
 
-    <link rel="shortcut icon" href="icons/curcy-24.png" type="image/png">
-	<link type="text/css" rel="stylesheet" href="ex-ui.css">
-	<link type="text/css" rel="stylesheet" href="currency.css">
+	<link rel="shortcut icon" href="icons/curcy-24.png" type="image/png">
+	<link type="text/css" rel="stylesheet" href="./css/ex-ui.css">
+	<link type="text/css" rel="stylesheet" href="./css/currency.css">
+	<link type="text/css" rel="stylesheet" href="./css/flags.css">
 
-	<script type="text/javascript" src="libs/jquery.min.js"></script>
-	<script type="text/javascript" src="libs/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="libs/decimal.min.js"></script>
+	<script type="text/javascript" src="./libs/jquery.min.js"></script>
+	<script type="text/javascript" src="./libs/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./libs/angular.min.js"></script>
+	<script type="text/javascript" src="./libs/decimal.min.js"></script>
 
-	<script type="text/javascript" src="data-loader.js"></script>
-	<script type="text/javascript" src="data-currencies.js"></script>
-	<script type="text/javascript" src="data-flags.js"></script>
+	<script type="text/javascript" src="./js/data-source.js"></script>
+	<script type="text/javascript" src="./js/src-fcca.js"></script>
+	<script type="text/javascript" src="./js/src-google.js"></script>
+	<script type="text/javascript" src="./js/jd-currencies.js"></script>
 
-	<script type="text/javascript" src="ex-ui.js"></script>
-	<script type="text/javascript" src="settings.js"></script>
-	<script type="text/javascript" src="rowsObj.js"></script>
+	<script type="text/javascript" src="./js/ex-ui.js"></script>
+	<script type="text/javascript" src="./js/settings.js"></script>
 	<script type="text/javascript" src="currencyUI.js"></script>
 </head>
 
-<body>
+<body ng-controller="MainCtrl">
 	<div id="main">
 		<div id="caption">
-			<h3>eCurrency v0.1</h3>
+			<h3>eCurrency v0.2</h3>
 			<span id="source">
 				<div class="combo-button click-to-popup-menu" title="Data Source">
-					<div class="icon icon-16" data-icon-image="http://www.freecurrencyconverterapi.com/favicon.ico"></div>
-					<div class="label">freecurrencyconverterapi.com</div>
+					<div class="icon icon-16 icon-manual">
+						<img ng-src="{{curSource.icon}}">
+					</div>
+					<div class="label">{{curSource.site.title}}</div>
 					<div class="caret"></div>
+
 					<ul class="dropdown-menu">
-						<li>
-							<div class="icon icon-16" data-icon-image="http://www.freecurrencyconverterapi.com/favicon.ico"></div>
-							freecurrencyconverterapi.com
+						<li ng-repeat="src in dataSource" ng-click="selectSource(src.name)">
+							<div class="icon icon-16 icon-manual">
+								<img ng-src="{{src.icon}}">
+							</div>
+							{{src.site.title}}
 						</li>
 					</ul>
 				</div>
@@ -43,23 +50,36 @@
 		</div>
 
 		<span>From:</span>
-		<div id="fromCurrency" class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu" title="From Currency">
-			<span class="icon icon-16" data-icon-image="./flags/unitedstates.png"></span>
-			<input class="label" name="currency" value="USD" />
+		<div id="fromCurrency" class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu" title="{{currencyItems[currencyFrom.cid].name}}">
+			<span class="icon icon-16 icon-manual flag flag-{{currencyFrom.cid}}">
+			</span>
+			<input type="text" class="label" name="currency" value="{{currencyFrom.cid}}" />
 			<span class="caret"></span>
 		</div>
 
-		&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;
 		<span>Amount:</span>
-		
-		<form id="fromAmount">
+
+		<form id="fromAmount" ng-submit="submitQuest()">
 			<div class="combo-box combo-box-icon amount" title="Currency Amount">
-				<span class="icon icon-16" data-icon-label="$"></span>
-				<input class="label" id="amountFrom" name="amount" type="number" value="100" required="required" min="0.0001" step="any" />
-				<img class="search" src="./icons/search.png" alt="?" title="Query rates!" />
+				<span class="icon icon-16 icon-manual" title="{{currencyItems[currencyFrom.cid].name}}">
+					<span ng-class="{hidden: c.icon}" class="label">{{currencyItems[currencyFrom.cid].symbol}}</span>
+				</span>
+				<input class="label" name="amount" type="number" required="required" min="0.0001" step="any" ng-model="amountFrom" />
+				<img class="search" src="./icons/search.png" alt="?" title="Query rates!" ng-click="submitQuest()" />
 				<input type="submit" class="submit" value="?" />
 			</div>
 		</form>
+
+		<span class="check-button" ng-class="{checked: autoRefresh}" ng-click="toggleAutoRefresh()">
+			<span class="check-box"><span class="circlet"></span></span>Auto request
+		</span>
+		<select>
+			<option value="180000">30min</option>
+			<option value="360000">1hour</option>
+			<option value="720000">2hours</option>
+			<option value="1440000">4hours</option>
+		</select>
 
 		<div class="toBox">
 			<div class="row header">
@@ -70,30 +90,52 @@
 				<span class="Back">Back</span>
 			</div>
 
-			<div class="row disabled template">
+			<div class="row {{t.state()}}" ng-disabled="{{t.isDisabled()}}" ng-repeat="t in targets">
 				<span class="index">
-					<span class="icon icon-12" data-icon-image="./icons/bin-12b.png" title="Remove Currency"></span>
-					<span class="number"></span>
+					<span class="icon icon-12" data-icon-image="./icons/bin-12b.png" title="Remove Currency" ng-click="t.reset()"></span>
+					<span class="number">{{t.index+1}}</span>
 				</span>
+
 				<span class="currency">
-					<div class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu">
-						<span class="icon icon-16" data-icon-label="&gt;" ></span>
-						<input class="label" name="currency" value="" />
+					<div class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu" title="{{currencyItems[t.cid].name}}">
+						<span class="icon icon-16 icon-manual">
+							<span class="icon icon-manual flag flag-{{t.cid}}" ng-class="{hidden: t.cid==''}"></span>
+							<span ng-class="{hidden: t.cid!=''}" class="label">&gt;</span>
+						</span>
+						<input type="text" ng-class="{'ui-state-disabled': t.isDisabled()}" ng-disabled="t.isDisabled()" class="label" data-index="{{t.index}}" ng-value="t.cid" />
 						<span class="caret"></span>
 					</div>
 				</span>
+
 				<span class="rate">
-					<div class="value"></div>
+					<div class="value">{{t.rate}}</div>
 				</span>
+
 				<span class="amount">
-					<div class="value"></div>
+					<div class="value">{{t.amount()}}</div>
 				</span>
+
 				<span class="Back">
-					<div class="value"></div>
+					<div class="value">{{t.back()}}</div>
 				</span>
 			</div>
-
 		</div>
+
+		<ul class="menu-template hidden">
+			<li class="currency " title="Remove Currency" data-cid="{{menuItemDict[0].cid}}" ng-model="menuItemDict[0]">
+				<span class="icon icon-16 icon-manual">
+					<span class="label">&gt;</span>
+				</span>
+				<span class="close">X</span>
+			</li>
+
+			<li class="currency {{c.classes}}" title="{{c.name}}" data-cid="{{cid}}" ng-repeat="(cid, c) in currencyItems">
+				<span class="icon icon-16 icon-manual flag flag-{{cid}}"></span>
+				<span>
+					<b>{{c.cid}}</b> - {{c.name}}
+				</span>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>

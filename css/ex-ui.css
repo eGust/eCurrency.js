@@ -1,0 +1,268 @@
+.debug,#debug {
+	display: block;
+	visibility: hidden;
+}
+
+.hidden {
+	display: none !important;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.icon, .combo-button, .combo-box {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+
+	word-wrap: normal;
+	white-space: nowrap;
+	overflow: visible;
+	margin: 0;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+/* icon */
+
+.icon {
+	overflow: hidden;
+	position: relative;
+	cursor: default;
+}
+
+.icon > .label {
+	position: relative;
+	display: block;
+	text-align: center;
+	z-index: 11;
+}
+
+.icon > img {
+	position: absolute;
+	z-index: 10;
+}
+
+.icon.hide-image > img {
+	display: none;
+}
+
+.icon-12 {
+	width: 14px;
+	height: 14px;
+}
+
+.icon-12 > img {
+	left: 1px;
+	top: 1px;
+	width: 12px;
+	height: 12px;
+}
+
+.icon-16 {
+	width: 18px;
+	height: 18px;
+}
+
+.icon-16 > img {
+	left: 1px;
+	top: 1px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon-16 > .label {
+	top: -1px;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 14px;
+}
+
+.icon-20 {
+	width: 22px;
+	height: 22px;
+}
+
+.icon-20 > img {
+	left: 1px;
+	top: 1px;
+	width: 20px;
+	height: 20px;
+}
+
+.icon-20 > .label {
+	top: 0;
+	width: 22px;
+	height: 22px;
+	line-height: 22px;
+	font-size: 17px;
+}
+
+.icon-24 {
+	width: 26px;
+	height: 26px;
+}
+
+.icon-24 > img {
+	left: 1px;
+	top: 1px;
+	width: 24px;
+	height: 24px;
+}
+
+.icon-24 > .label {
+	top: 0;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	font-size: 20px;
+}
+
+/* combo-button */
+
+.combo-button {
+	padding: 5px 10px;
+	cursor: pointer;
+	word-spacing: -.5em;
+}
+
+.combo-button > * {
+	display: inline-block;
+	word-spacing: 0;
+}
+
+.combo-button > .label {
+	height: 32px;
+	line-height: 30px;
+	padding: 0 6px;
+}
+
+.caret {
+	display: inline-block;
+	padding: 0;
+	width: 0;
+	height: 0;
+	vertical-align: middle;
+	border-top: 4px solid;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
+
+.dropdown-menu {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	float: left;
+
+	min-width: 160px;
+	padding: 5px 0;
+	margin: 1px 0;
+	text-align: left;
+	max-height: 200px;
+
+	list-style: none;
+	z-index: 100;
+	word-wrap: normal;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	background-color: white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+	cursor: default;
+}
+
+.open-menu > .dropdown-menu {
+	display: block;
+}
+
+.dropdown-menu > li {
+	position: relative;
+	display: block;
+	padding: 1px 12px 1px 30px;
+	margin: 2px 0;
+	height: 27px;
+	line-height: 20px;
+	vertical-align: middle;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.dropdown-menu > li > .icon {
+	position: absolute;
+}
+
+.dropdown-menu > li > .icon-16 {
+	left: 7px;
+	top: 5px;
+}
+
+.dropdown-menu > li > .icon-20 {
+	left: 5px;
+	top: 3px;
+}
+
+.dropdown-menu > li > .icon-24 {
+	left: 2px;
+	top: 0px;
+}
+
+/*
+	combo-box:	icon/text	text/.label	caret
+		icon
+			image
+			label
+		caption
+			label
+			.label
+		button	:hyper-button
+*/
+
+.combo-box {
+	word-spacing: -.5em;
+}
+
+.combo-box[role="dropdown-menu"], .combo-box[role="dropdown-menu"] * {
+	cursor: pointer;
+}
+
+.combo-box > * {
+	word-spacing: 0;
+}
+
+.combo-box > .label {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-weight: bold;
+}
+
+.combo-box > .icon {
+	position: absolute;
+	left: 7px;
+	top: 3px;
+}
+
+.combo-box > .caret {
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+}
+
+.combo-box-icon > .label {
+	padding-left: 28px;
+}
+
+.combo-box-caret > .label {
+	padding-right: 15px;
+}
+

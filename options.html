@@ -1,0 +1,84 @@
+<!doctype html>
+<html ng-app="eCurrency">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>eCurrency</title>
+
+	<link rel="shortcut icon" href="icons/curcy-24.png" type="image/png">
+	<link type="text/css" rel="stylesheet" href="./css/ex-ui.css">
+	<link type="text/css" rel="stylesheet" href="./css/currency.css">
+	<link type="text/css" rel="stylesheet" href="./css/flags.css">
+
+	<script type="text/javascript" src="./libs/jquery.min.js"></script>
+	<script type="text/javascript" src="./libs/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./libs/angular.min.js"></script>
+
+	<script type="text/javascript" src="./js/jd-currencies.js"></script>
+	<script type="text/javascript" src="./js/ex-ui.js"></script>
+	<script type="text/javascript" src="./js/settings.js"></script>
+	<script type="text/javascript" src="optionsUI.js"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+	<div id="main">
+		<div class="caption-panel">
+			<h3>eCurrency Options</h3>
+		</div>
+
+		<div class="auto-refresh-panel">
+			<span class="check-button">
+				<span class="check-box"><span class="circlet"></span></span>Auto Request
+			</span>
+			Time-out Number-Box
+		</div>
+		<hr>
+
+		<div class="currency-panel">
+			<div class="row header">
+				&nbsp;&nbsp;&nbsp;
+				<span>Short List</span>:
+				<span class="nobold">display on the top of menu</span>
+			</div>
+			<div class="row {{cb.state()}}" ng-disabled="{{cb.isDisabled()}}" ng-repeat="cb in commonBoxes">
+				<span class="index">
+					<span class="icon icon-12" data-icon-image="./icons/bin-12b.png" title="Remove Currency" ng-click="cb.remove()"></span>
+					<span class="number">{{cb.index+1}}</span>
+				</span>
+
+				<span class="currency">
+					<div class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu" title="{{currencyInfo[cb.cid].name}}">
+						<span class="icon icon-16 icon-manual">
+							<span class="icon icon-manual flag flag-{{cb.cid}}" ng-class="{hidden: cb.cid==''}"></span>
+							<span ng-class="{hidden: cb.cid!=''}" class="label">&gt;</span>
+						</span>
+						<input type="text" ng-class="{'ui-state-disabled': cb.isDisabled()}" ng-disabled="cb.isDisabled()" class="label" data-index="{{cb.index}}" ng-value="cb.cid" />
+						<span class="caret"></span>
+					</div>
+				</span>
+
+				<span class="currency-name">{{currencyInfo[cb.cid].name}}</span>
+
+				<span class="buttons" ng-class="{hidden: cb.cid==''}">
+					<span class="button-wrap up" ng-class="{'disabled': cb.index==0}">
+						<span class="button-caret up" ng-click="swapBox(cb.index, cb.index-1)"></span>
+					</span>
+					<span class="button-wrap down" ng-class="{'disabled': cb.index==LAST_INDEX || commonBoxes[cb.index+1].cid==''}">
+						<span class="button-caret down" ng-click="swapBox(cb.index, cb.index+1)"></span>
+					</span>
+				</span>
+			</div>
+		</div>
+		</div>
+
+		<ul class="menu-template hidden">
+			<li class="currency {{c.classes}}" title="{{c.name}}" data-cid="{{c.cid}}" ng-repeat="c in currencyInfo">
+				<span class="icon icon-16 icon-manual flag flag-{{c.cid}}"></span>
+				<span>
+					<b>{{c.cid}}</b> - {{c.name}}
+				</span>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
