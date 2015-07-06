@@ -8,7 +8,7 @@ function MyStorage(prefix) {
 		}
 
 		function setItem(p, k, v) {
-			localStorage.setItem(p.str+k, JSON.stringify(v));
+			localStorage.setItem(p.str+k, JSON.stringify(v === undefined ? null : v));
 		}
 
 		function removeItem(p, k) {
@@ -64,7 +64,7 @@ function MyStorage(prefix) {
 		};
 
 		self.set = function (keys, values) {
-			if ( typeof(keys) == "string" ) {
+			if ( typeof(keys) === "string" ) {
 				r[keys] = setItem(this.prefix, keys, values);
 			} else if ( keys instanceof Array && values instanceof Array && keys.length == values.length) {
 				for (var i in keys)
@@ -161,4 +161,6 @@ var myStg = MyStorage('prfx:ecurrency@eGust.stg/'),
 		fromAmount: 100,
 		targets: 'EUR,CNY,GBP'.split(','),
 		commons: "USD,EUR,CNY,GBP,JPY,HKD,CAD,AUD,BRL,INR,RUB".split(','),
+		autoRefresh: false,
+		lastQuery: null,
 	}).load();

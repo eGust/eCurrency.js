@@ -16,8 +16,7 @@
 	<script type="text/javascript" src="./libs/decimal.min.js"></script>
 
 	<script type="text/javascript" src="./js/data-source.js"></script>
-	<script type="text/javascript" src="./js/src-fcca.js"></script>
-	<script type="text/javascript" src="./js/src-google.js"></script>
+	<script type="text/javascript" src="./js/data-providers.js"></script>
 	<script type="text/javascript" src="./js/jd-currencies.js"></script>
 
 	<script type="text/javascript" src="./js/ex-ui.js"></script>
@@ -28,7 +27,7 @@
 <body ng-controller="MainCtrl">
 	<div id="main">
 		<div id="caption">
-			<h3>eCurrency v0.2</h3>
+			<h3>eCurrency v0.3.0</h3>
 			<span id="source">
 				<div class="combo-button click-to-popup-menu" title="Data Source">
 					<div class="icon icon-16 icon-manual">
@@ -49,7 +48,7 @@
 			</span>
 		</div>
 
-		<span>From:</span>
+		<span class="top3">From:</span>
 		<div id="fromCurrency" class="combo-box combo-box-icon combo-box-caret ui-widget currency" role="dropdown-menu" title="{{currencyItems[currencyFrom.cid].name}}">
 			<span class="icon icon-16 icon-manual flag flag-{{currencyFrom.cid}}">
 			</span>
@@ -58,7 +57,7 @@
 		</div>
 
 		&nbsp;&nbsp;
-		<span>Amount:</span>
+		<span class="top3">Amount:</span>
 
 		<form id="fromAmount" ng-submit="submitQuest()">
 			<div class="combo-box combo-box-icon amount" title="Currency Amount">
@@ -70,15 +69,19 @@
 				<input type="submit" class="submit" value="?" />
 			</div>
 		</form>
-
-		<span class="check-button" ng-class="{checked: autoRefresh}" ng-click="toggleAutoRefresh()">
-			<span class="check-box"><span class="circlet"></span></span>Auto request
+		
+		&nbsp;&nbsp;
+		<span class="check-button top3" ng-class="{checked: autoRefresh}" ng-click="toggleAutoRefresh()">
+			<span class="check-box top1"><span class="circlet"></span></span>
+			<span>Auto refresh</span>
 		</span>
-		<select>
-			<option value="180000">30min</option>
-			<option value="360000">1hour</option>
-			<option value="720000">2hours</option>
-			<option value="1440000">4hours</option>
+		<select class="top3" ng-model="refreshInterval" ng-change="refreshIntervalChanged()">
+			<option value="1">1 hour</option>
+			<option value="2">2 hours</option>
+			<option value="3">3 hours</option>
+			<option value="4">4 hours</option>
+			<option value="6">6 hours</option>
+			<option value="12">12 hours</option>
 		</select>
 
 		<div class="toBox">

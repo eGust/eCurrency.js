@@ -82,6 +82,9 @@ function reloadSettings() {
 				}
 			}
 		}
+
+		ajScope.autoRefresh = options.autoRefresh || false;
+		ajScope.refreshInterval = options.refreshInterval || 1;
 	} catch (e) {}
 	finally {
 		ajScope.$apply();
@@ -93,13 +96,13 @@ function saveCurrencies(isTarget) {
 		var targets = [];
 		for (var i in ajTargets) {
 			var cid = ajTargets[i].cid;
-			if (cid == '')
+			if (!cid)
 				break;
 			targets.push(cid);
 		}
-		settings.set({ targets: targets });
+		settings.set({ targets: targets, lastQuery: null, });
 	} else {
-		settings.set({ fromCurrency: ajScope.currencyFrom.cid });
+		settings.set({ fromCurrency: ajScope.currencyFrom.cid, lastQuery: null, });
 	}
 }
 
@@ -247,7 +250,8 @@ function initUI() {
 }
 
 function requestRates(cidFrom, targets, source, $http) {
-	var settings = {
+	var tm = Date.now(),
+		ajaxSettings = {
 			url: source.url,
 			data: {},
 			dataType: source.type,
@@ -259,6 +263,7 @@ function requestRates(cidFrom, targets, source, $http) {
 				}
 
 				ajScope.$apply();
+				settings.set( { lastQuery: { timestamp: tm, rates: decoded, } } );
 			},
 			error: function() {
 				//cbError = '[fail] AJAX time-out';
@@ -266,15 +271,15 @@ function requestRates(cidFrom, targets, source, $http) {
 		};
 
 	for (var k in source.args) {
-		settings.data[k] = source.args[k];
+		ajaxSettings.data[k] = source.args[k];
 	}
 
 	var datas = source.encoder(cidFrom, Object.keys(targets));
 	for (var k in datas) {
-		settings.data[k] = datas[k];
+		ajaxSettings.data[k] = datas[k];
 	}
 
-	$.ajax(settings);
+	$.ajax(ajaxSettings);
 }
 
 $(function () {
@@ -287,8 +292,27 @@ $(function () {
 				var src = ds[i];
 				src['icon'] = src.site.icon;
 			}
+
+			var lq = settings.options.lastQuery, interval = ajScope.refreshInterval * 3600000, current = Date.now();
+			if (lq && !lq.timestamp) {
+				settings.set( { lastQuery: lq = null, } );
+			}
+
+			if (lq) {
+				var targets = ajScope.targets, rates = lq.rates;
+				for (var i = 0, _len = targets.length; i < _len; i++) {
+					var tc = targets[i];
+					if (!tc.cid)
+						break;
+					tc.rate = rates[tc.cid];
+				}
+			}
+
+			if ( settings.options.autoRefresh && (!lq || current - lq.timestamp >= interval) ) {
+				ajScope.submitQuest();
+			}
 		});
-	}, 10);
+	}, 30);
 });
 
 var ajApp = angular.module('eCurrency', []),
@@ -398,19 +422,25 @@ ajApp
 		$scope.menuItemDict = ajMenuItemDict;
 		$scope.amountFrom = 100;
 		$scope.autoRefresh = false;
+		$scope.refreshInterval = 1;
 
 		$scope.selectSource = function (name) {
 			if (name == $scope.curSource.name)
 				return;
 
-			for (var i in dataSource) {
+			var i, _len;
+			for (i = 0, _len = dataSource.length; i < _len; i++) {
 				var ds = dataSource[i];
 				if (ds.name == name) {
 					$scope.curSource = ds;
 					break;
 				}
 			}
-			settings.set( { source: name, } );
+
+			for (i = 0, _len = ajTargets.length; i < _len; i++) {
+				ajTargets[i].rate = '';
+			}
+			settings.set( { source: name, lastQuery: null, } );
 		}
 
 		$scope.submitQuest = function () {
@@ -432,6 +462,11 @@ ajApp
 
 		$scope.toggleAutoRefresh = function () {
 			$scope.autoRefresh = !$scope.autoRefresh;
+			settings.set( { autoRefresh: $scope.autoRefresh, } );
+		}
+
+		$scope.refreshIntervalChanged = function () {
+			settings.set( { refreshInterval: $scope.refreshInterval, } );
 		}
 	}
 ]);

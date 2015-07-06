@@ -281,7 +281,7 @@ var currencyDict = {
 	},
 	"MAD": {
 		"currencyName": "Moroccan Dirham",
-		"currencySymbol": "MAD",
+		"currencySymbol": "د.م.",
 		"id": "MAD"
 	},
 	"MKD": {

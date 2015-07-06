@@ -6,6 +6,10 @@ body {
 	text-align: center;
 }
 
+span {
+	font-size: 13px;
+}
+
 #main {
 	width: 560px;
 	margin-left: auto;
@@ -405,7 +409,7 @@ form {
 	top: 2px;
 	width: 7px;
 	height: 7px;
-	border-radius: 9px;
+	border-radius: 6px;
 	background-color: #00b2ff;
 }
 
@@ -415,4 +419,14 @@ form {
 
 .auto-refresh-panel {
 	text-align: left;
+}
+
+.top3 {
+	display: inline-block;
+	top: 2px;
+	position: relative;
+}
+
+.top1 {
+	top: 1px;
 }
