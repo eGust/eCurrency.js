@@ -2,7 +2,7 @@ var	dataSource = [],
 	defaults = {
 		dataSource: [],
 		ajaxFormats: {	// location.href.startsWith:
-			'resource://': [ 'jsonp', 'xml', ],
+			'resource://': [ 'json', 'xml', ],
 			'chrome-extension://': [ 'json', 'xml', ],
 		},
 	};

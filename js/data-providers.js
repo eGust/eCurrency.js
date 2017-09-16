@@ -1,4 +1,4 @@
-// http://egust.thefreephphost.com/currency_api/query_rate.php?provider=openexchangerates&from=CNY&targets=JPY_USD_HKD_NZD
+// http://egust.000webhostapp.com/currency_api/rates.php?provider=openexchangerates&from=CNY&targets=JPY_USD_HKD_NZD
 /**
 [Usage]
     parameters:
@@ -10,7 +10,7 @@
         Because I'm using free plans, the limits are 1000 requests/month, and they only update the rates every 60 minuts for free plans, so my API also updates the rates every 60mins.
 */
 
-// http://egust.altervista.org/currency_api/google_rate.php?from=USD&targets=JPY_CNY_HKD_NZD
+// http://egust.000webhostapp.com/currency_api/rates.php?from=USD&targets=JPY_CNY_HKD_NZD
 
 function commonEncodeConvertions(from, targets) {
     return { from: from, targets: targets.join("_") };
@@ -26,14 +26,7 @@ defaults.dataSource = defaults.dataSource.concat([
         ajax: {
             'json': {
                 type: 'json',
-                url: "http://egust.thefreephphost.com/currency_api/query_rate.php",
-                args: { provider: 'openexchangerates', },
-                encoder: commonEncodeConvertions,
-                responser: commonDecodeConvertions,
-            },
-            'jsonp': {
-                type: 'jsonp',
-                url: "http://egust.thefreephphost.com/currency_api/query_rate.php",
+                url: "http://egust.000webhostapp.com/currency_api/rates.php",
                 args: { provider: 'openexchangerates', },
                 encoder: commonEncodeConvertions,
                 responser: commonDecodeConvertions,
@@ -49,21 +42,14 @@ defaults.dataSource = defaults.dataSource.concat([
         ajax: {
             'json': {
                 type: 'json',
-                url: "http://egust.thefreephphost.com/currency_api/query_rate.php",
-                args: { provider: 'currencylayer', },
-                encoder: commonEncodeConvertions,
-                responser: commonDecodeConvertions,
-            },
-            'jsonp': {
-                type: 'jsonp',
-                url: "http://egust.thefreephphost.com/currency_api/query_rate.php",
+                url: "http://egust.000webhostapp.com/currency_api/rates.php",
                 args: { provider: 'currencylayer', },
                 encoder: commonEncodeConvertions,
                 responser: commonDecodeConvertions,
             },
         },
         site: {
-            icon: 'https://currencylayer.com/images/currencylayer_shortcut_icon.ico',
+            icon: 'https://currencylayer.com/images/icons/currencylayer_shortcut_icon.ico',
             title: 'currencylayer.com',
         },
     },
@@ -72,15 +58,8 @@ defaults.dataSource = defaults.dataSource.concat([
         ajax: {
             'json': {
                 type: 'json',
-                url: "http://egust.altervista.org/currency_api/google_rate.php",
-                args: {},
-                encoder: commonEncodeConvertions,
-                responser: commonDecodeConvertions,
-            },
-            'jsonp': {
-                type: 'jsonp',
-                url: "http://egust.altervista.org/currency_api/google_rate.php",
-                args: {},
+                url: "http://egust.000webhostapp.com/currency_api/rates.php",
+                args: { provider: 'google' },
                 encoder: commonEncodeConvertions,
                 responser: commonDecodeConvertions,
             },

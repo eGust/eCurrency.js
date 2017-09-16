@@ -32,7 +32,7 @@
 	}
 
 	// dataSource
-	var ajaxFmts = ['jsonp'], href = location.href;
+	var ajaxFmts = ['json'], href = location.href;
 	for (var fmt in defaults.ajaxFormats) {
 		if (href.indexOf(fmt) == 0) {
 			ajaxFmts = defaults.ajaxFormats[fmt];
